@@ -23,5 +23,6 @@ A simple weather application built using Node.js, Express, and the OpenWeatherMa
    ```bash
    git clone https://github.com/yourusername/weather-app.git
 2. Install dependencies:
-  ```bash
-npm install
+   ```
+   npm install
+
