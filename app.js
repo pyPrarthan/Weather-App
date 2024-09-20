@@ -2,7 +2,8 @@ const express = require('express')
 const axios = require('axios')
 const app = express()
 
-const API_KEY = 'fecb85fd3a879c7dfae3caa5a07eb9eb'
+require("dotenv").config()
+const API_KEY = process.env.API_KEY
 
 //Home route
 app.get('/', (req, res)=>{
@@ -15,20 +16,21 @@ app.get('/weather', (req,res)=>{
 })
 
 //Weather Route for a specific city
-app.get('/weather/:city', async (req,res)=>{
-    const city = req.params.city
-    
-    try{
-      //Make a request to OpenWeatherApp API
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
-      const weatherData = response.data;
+app.get("/weather/:city", async (req, res) => {
+  const city = req.params.city;
 
-      //Getting the main weather condition (like "Clear", "Rain", "Clouds", etc.)
-      const weatherCondition = weatherData.weather[0].main;
+  try {
+    // Make a request to OpenWeatherMap API
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const weatherData = response.data;
 
-      // Sending HTML with embedded JavaScript to dynamically change background color
-      res.send(`
+    // Getting the main weather condition (like "Clear", "Rain", "Clouds", etc.)
+    const weatherCondition = weatherData.weather[0].main;
+
+    // Sending HTML with embedded JavaScript to dynamically change background color
+    res.send(`
             <html>
                 <head>
                     <title>Weather in ${city}</title>
@@ -71,9 +73,51 @@ app.get('/weather/:city', async (req,res)=>{
                 </body>
             </html>
         `);
-    }catch(error){
-        res.send('City not found or there was an error retriving the data')
+  } catch (error) {
+    if (error.response) {
+      // API responded with a status other than 2xx
+      res.send(`
+        <html>  
+          <head>
+            <title>Error</title>
+          </head>
+          <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
+            <h1>Error</h1>
+            <p>${error.response.data.message}</p>
+            <p><a href="/">Go Back</a></p>
+          </body>
+        </html>
+      `);
+    } else if (error.request) {
+      // Request was made, but no response was received
+      res.send(`
+        <html>  
+          <head>
+            <title>Error</title>
+          </head>
+          <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
+            <h1>Error</h1>
+            <p>No response from the weather service. Please try again later.</p>
+            <p><a href="/">Go Back</a></p>
+          </body>
+        </html>
+      `);
+    } else {
+      // Something else happened while setting up the request
+      res.send(`
+        <html>  
+          <head>
+            <title>Error</title>
+          </head>
+          <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
+            <h1>Error</h1>
+            <p>Something went wrong! Please try again.</p>
+            <p><a href="/">Go Back</a></p>
+          </body>
+        </html>
+      `)
     }
+  }
 })
 
 //Start the Server
