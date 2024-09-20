@@ -58,7 +58,7 @@
 <body>
     <div class="container">
         <h1>Weather App</h1>
-        <form class="search-form" action="/weather" method="GET">
+        <form class="search-form">
             <input type="text" name="city" placeholder="Enter city name" required>
             <button type="submit">Get Weather</button>
         </form>
@@ -68,7 +68,7 @@
         document.querySelector('.search-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const city = document.querySelector('input[name="city"]').value;
-            window.location.href = `/weather/${encodeURLComponent(city)}`;
+            window.location.href = `/weather/${encodeURIComponent(city)}`; // Use encodeURIComponent
         });
     </script>
 </body>
