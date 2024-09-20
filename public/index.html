@@ -66,9 +66,9 @@
     </div>
     <script>
         document.querySelector('.search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const city = document.querySelector('input[name="city"]').value;
-            window.location.href = `/weather/${encodeURIComponent(city)}`; // Use encodeURIComponent
+        e.preventDefault();
+        const city = document.querySelector('input[name="city"]').value;
+        window.location.href = `/weather/${city}`; // Redirect to the weather route
         });
     </script>
 </body>
