@@ -19,17 +19,58 @@ app.get('/weather/:city', async (req,res)=>{
     const city = req.params.city
     
     try{
-        //Make a request to OpenWeatherApp API
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-        const weatherData = response.data
+      //Make a request to OpenWeatherApp API
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+      const weatherData = response.data;
 
-        res.send(`
-            <h1>Weather in ${city}</h1>
-            <p>Temperature: ${weatherData.main.temp}°C</p>
-            <p>Weather: ${weatherData.weather[0].description}</p>
-            `);
-        
+      //Getting the main weather condition (like "Clear", "Rain", "Clouds", etc.)
+      const weatherCondition = weatherData.weather[0].main;
 
+      // Sending HTML with embedded JavaScript to dynamically change background color
+      res.send(`
+            <html>
+                <head>
+                    <title>Weather in ${city}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            text-align: center;
+                            padding-top: 50px;
+                            transition: background-color 1s ease;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Weather in ${city}</h1>
+                    <p>Temperature: ${weatherData.main.temp}°C</p>
+                    <p>Weather: ${weatherData.weather[0].description}</p>
+
+                    <script>
+                        const weatherCondition = "${weatherCondition}";
+                        const body = document.body;
+
+                        switch(weatherCondition) {
+                            case 'Clear':
+                                body.style.backgroundColor = 'yellow';
+                                break;
+                            case 'Rain':
+                                body.style.backgroundColor = 'blue';
+                                break;
+                            case 'Clouds':
+                                body.style.backgroundColor = 'grey';
+                                break;
+                            case 'Snow':
+                                body.style.backgroundColor = 'lightblue';
+                                break;
+                            default:
+                                body.style.backgroundColor = 'lightgrey';
+                                break;
+                        }
+                    </script>
+                </body>
+            </html>
+        `);
     }catch(error){
         res.send('City not found or there was an error retriving the data')
     }
