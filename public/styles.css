@@ -1,0 +1,83 @@
+/* For Dynamic Background Color Change */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+    transition: background-color 1s ease;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear {
+    background-color: yellow; /* Clear weather */
+}
+
+.rain {
+    background-color: blue; /* Rainy weather */
+}
+
+.clouds {
+    background-color: grey; /* Cloudy weather */
+}
+
+.snow {
+    background-color: lightblue; /* Snowy weather */
+}
+
+.haze{
+    background-color: rgb(45, 40, 39); /* haze */
+}
+
+.default {
+    background-color: lightgrey; /* Default background */
+}
+
+/* Styles from index.html */
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    width: 400px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background-color: #45a049;
+}
+
+/* Styles for error pages */
+.error-page h1 {
+    color: #d32f2f; /* Error color */
+}
+
+.error-page p {
+    margin-bottom: 20px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}
