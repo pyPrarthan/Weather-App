@@ -28,7 +28,7 @@ A simple weather application built using Node.js, Express, and the OpenWeatherMa
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/weather-app.git
+   git clone https://github.com/pyPrarthan/Weather-App.git
 2. Install dependencies:
    ```
    npm install
