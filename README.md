@@ -63,7 +63,7 @@ Feel free to submit issues or pull requests. I welcome contributions! 🤝
 * OpenWeatherMap API - API for fetching weather data
   
 ## 👤 Author
-Your Name - pyPrarthan
+pyPrarthan
 
 ## 📫 Contact
 For any questions or feedback, feel free to reach out at christianprarthan07@gmail.com
