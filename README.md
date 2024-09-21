@@ -55,7 +55,7 @@ The background color changes based on the following weather conditions:
 * Default: Light Grey 🌫️
 
 ## 📚 Contributing
-Feel free to submit issues or pull requests. We welcome contributions! 🤝
+Feel free to submit issues or pull requests. I welcome contributions! 🤝
 
 ## 🛠️ Built With
 * Express.js - Web framework for Node.js
